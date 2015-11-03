@@ -15,7 +15,10 @@ object CheckStateSpecification extends Properties("CheckStates") {
     (a: State, b: State) =>
       val checks = Var(Map("test" -> a, "test2" -> b))
       val node = mkNode("test", checks, Rx(Set.empty))
-      node() equals (Set(a, b) max)
+
+      println(s"expected state: ${Set(a, b) max}")
+
+      (node() priority) equals ((Set(a, b) max) priority)
   }
 
   property("derived state property") = forAll({
@@ -32,9 +35,10 @@ object CheckStateSpecification extends Properties("CheckStates") {
       rootChecks() = rootChecks() + ("CPU" -> b)
 
       if (a equals Check) {
-        target() equals Check
+        (target() priority) equals (Check priority)
       } else {
-        target() equals (Set(a, b) max)
+        println(s"expected state: ${Set(a, b) max}")
+        (target() priority) equals ((Set(a, b) max) priority)
       }
   })
 

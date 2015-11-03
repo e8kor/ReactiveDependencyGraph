@@ -20,10 +20,12 @@ object Solution {
       val state = {
         val values = (checks() values) toSeq
 
+        println(s"possible own states: ${values mkString ", "}")
+
         ((values sorted) lastOption) getOrElse NoData
       }
 
-      println(s"own state of $nodeName updated to $state")
+      println(s"picked own state: $state")
 
       state
     }
@@ -35,10 +37,7 @@ object Solution {
           state
       } toSeq) sorted)[State]
 
-      states foreach {
-        state =>
-          println(s"derived state of $nodeName updated to $state")
-      }
+      println(s"possible derived states: ${states mkString ", "}")
 
       val propagated = states lastOption
 

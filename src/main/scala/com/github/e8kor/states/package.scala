@@ -6,7 +6,7 @@ package object states {
 
   implicit object StateOrder extends Ordering[State] {
     override def compare(x: State, y: State): Int = {
-      (x priority) compare (y priority)
+      (x priority) compareTo (y priority)
     }
   }
 
@@ -23,6 +23,8 @@ package object states {
     require(aggregated ne Check, s"aggregated state cannot be $Check")
 
     val derivedState = Set(own, aggregated) max
+
+    println(s"picked derived state: $derivedState")
 
     def priority: Int = derivedState priority
 
