@@ -5,8 +5,19 @@ import rx._
 
 import scala.language.postfixOps
 
+/**
+  * dummy object to hold function
+  */
 object Solution {
 
+  /**
+    * Function is responsible for creation of nodes.
+    *
+    * @param nodeName name for node output point, useful for debugging and logging
+    * @param checks represent characteristics user found valuable
+    * @param dependsOn describes relations of current node, require to calculate derived state
+    * @return current state of node
+    */
   def mkNode(
               nodeName: String,
               checks: Var[Map[String, State]] = Var(Map[String, State]()),
@@ -55,13 +66,4 @@ object Solution {
 
   }
 
-  val dbChecks = Var(Map[String, State]() + ("CPU" -> Clear) + ("Mem" -> Clear))
-  val db2 = mkNode("DB", dbChecks)
-
-  val appChecks = Var(Map[String, State]() + ("CPU" -> Clear) + ("Mem" -> Clear))
-  val app2 = mkNode("App", appChecks, Rx {
-    Set(db2)
-  })
-
-  dbChecks() = dbChecks() + ("CPU" -> Warning)
 }
