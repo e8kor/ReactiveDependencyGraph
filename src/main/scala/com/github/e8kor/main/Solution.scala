@@ -30,10 +30,10 @@ object Solution {
 
     val aggregated = Rx {
 
-      val states = (dependsOn() map (entry => entry()) collect {
+      val states = ((dependsOn() map (entry => entry()) collect {
         case state: CanPropagate =>
           state
-      } toSeq) sorted
+      } toSeq) sorted)[State]
 
       states foreach {
         state =>
@@ -58,6 +58,7 @@ object Solution {
 
   val dbChecks = Var(Map[String, State]() + ("CPU" -> Clear) + ("Mem" -> Clear))
   val db2 = mkNode("DB", dbChecks)
+
   val appChecks = Var(Map[String, State]() + ("CPU" -> Clear) + ("Mem" -> Clear))
   val app2 = mkNode("App", appChecks, Rx {
     Set(db2)
