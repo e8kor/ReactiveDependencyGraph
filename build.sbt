@@ -13,6 +13,8 @@ libraryDependencies += "com.assembla.scala-incubator" %% "graph-constrained" % "
 
 libraryDependencies += "org.scalacheck" %% "scalacheck" % "1.12.5" % "test"
 
+libraryDependencies += "com.lihaoyi" %% "scalarx" % "0.2.8"
+
 // Uncomment to use Akka
 //libraryDependencies += "com.typesafe.akka" %% "akka-actor" % "2.3.11"
 
