@@ -9,13 +9,13 @@ import scala.language.postfixOps
 import com.github.e8kor.main.Solution.mkNode
 
 // creating entry point to db node
-val dbChecks = Var(Map[String, State]() + ("CPU" -> NoData) + ("Mem" -> NoData))
+val dbChecks = Var(Map[String, State]("CPU" -> NoData, "Mem" -> NoData))
 
 // creating db node
 val db2 = mkNode("DB", dbChecks)
 
 // creating entry point to app node
-val appChecks = Var(Map[String, State]() + ("CPU" -> NoData) + ("Mem" -> NoData))
+val appChecks = Var(Map[String, State]("CPU" -> NoData, "Mem" -> NoData))
 
 // creating app node
 val app2 = mkNode("App", appChecks, Rx {

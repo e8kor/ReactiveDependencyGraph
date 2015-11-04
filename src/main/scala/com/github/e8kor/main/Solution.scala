@@ -21,9 +21,7 @@ object Solution {
   def mkNode(
               nodeName: String,
               checks: Var[Map[String, State]] = Var(Map[String, State]()),
-              dependsOn: Rx[Set[Rx[State]]] = Rx {
-                Set.empty[Rx[State]]
-              }
+              dependsOn: Rx[Set[Rx[State]]] = Var((Set empty)[Rx[State]])
             ): Rx[State] = {
 
     val own = Rx {
@@ -60,9 +58,9 @@ object Solution {
       propagated getOrElse NoData
     }
 
-    Rx(name = nodeName)({
+    Rx{
       DerivedState(own(), aggregated())
-    })
+    }
 
   }
 
